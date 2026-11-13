@@ -7,7 +7,7 @@ from pathlib import Path
 from .models import DocumentPage, Chunk
 from .ingestion import load_pdf
 from .chunking import fixed_size, by_paragraph
-from .embeddings import OpenRouterEmbedder
+from .embeddings import OpenRouterEmbedder, SentenceTransformerEmbedder
 from .store import PgVectorStore
 from .evaluation import evaluate_query, summarize
 
@@ -62,8 +62,14 @@ def main() -> None:
     chunks_strat_c = chunks_strat_b
 
     # 4. Initialize Embedder & Vector Store
-    print("\n[3/5] Initializing OpenRouter Embedder & PgVector Store...")
-    embedder = OpenRouterEmbedder(model_name="text-embedding-3-small", api_key=api_key)
+    print("\n[3/5] Initializing Embedder & PgVector Store...")
+    default_kaggle_model = "/kaggle/input/models/google/embeddinggemma-2/transformers/embeddinggemma-2/1"
+    backend = os.environ.get("EMBEDDER_BACKEND", "auto")
+    if backend == "sentence_transformers" or (backend == "auto" and Path(default_kaggle_model).exists()):
+        model_path = os.environ.get("EMBED_MODEL_PATH", default_kaggle_model)
+        embedder = SentenceTransformerEmbedder(model_name=model_path)
+    else:
+        embedder = OpenRouterEmbedder(model_name="text-embedding-3-small", api_key=api_key)
     print(f"  ✓ Embedder initialized: {embedder.model_name} (Dimensions: {embedder.dimensions})")
     
     store = PgVectorStore(database_url=db_url, dimensions=embedder.dimensions)

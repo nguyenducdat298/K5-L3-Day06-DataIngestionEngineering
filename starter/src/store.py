@@ -21,14 +21,15 @@ class PgVectorStore:
             cur.execute(f"""
             CREATE TABLE IF NOT EXISTS rag_chunks (
                 id SERIAL PRIMARY KEY,
-                chunk_id VARCHAR(100) UNIQUE,
+                chunk_id VARCHAR(100) NOT NULL,
                 strategy VARCHAR(50) NOT NULL,
                 document_id VARCHAR(100) NOT NULL,
                 source TEXT NOT NULL,
                 page INT NOT NULL,
                 text TEXT NOT NULL,
                 metadata JSONB NOT NULL,
-                embedding vector({self.dimensions}) NOT NULL
+                embedding vector({self.dimensions}) NOT NULL,
+                UNIQUE (strategy, chunk_id)
             );
             CREATE INDEX IF NOT EXISTS idx_rag_chunks_strat ON rag_chunks (strategy);
             CREATE INDEX IF NOT EXISTS idx_rag_chunks_doc ON rag_chunks (document_id);
@@ -59,8 +60,7 @@ class PgVectorStore:
             insert_query = """
             INSERT INTO rag_chunks (chunk_id, strategy, document_id, source, page, text, metadata, embedding)
             VALUES %s
-            ON CONFLICT (chunk_id) DO UPDATE SET
-                strategy = EXCLUDED.strategy,
+            ON CONFLICT (strategy, chunk_id) DO UPDATE SET
                 document_id = EXCLUDED.document_id,
                 source = EXCLUDED.source,
                 page = EXCLUDED.page,
