@@ -1,4 +1,4 @@
-strategy,chunking,chunk_size,overlap,metadata,filter,vectorizer,hypothesis,dev_hit1,dev_hit3,test_hit1,test_hit3,notes
-A,,,,,,,,,,,,
-B,,,,,,,,,,,,
-C,,,,,,,,,,,,
+strategy,chunk_count,embed_time_s,hit1_overall,hit3_overall,hit3_dev,hit3_test
+A_fixed,218,14.80,0.70,0.85,0.867,0.800
+B_paragraph,136,9.25,0.80,0.95,0.933,1.000
+C_meta_filter,136,9.25,0.85,1.00,1.000,1.000

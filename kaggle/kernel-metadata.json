@@ -1,0 +1,15 @@
+{
+  "id": "tommydatlc/day06-rag-ingestion-benchmark",
+  "title": "day06 rag ingestion benchmark",
+  "code_file": "day06_rag_benchmark.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_tpu": "false",
+  "enable_internet": "true",
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
