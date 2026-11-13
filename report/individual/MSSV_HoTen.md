@@ -1,7 +1,7 @@
 # Báo Cáo Thí Nghiệm Day 06 — Data Ingestion Engineering
 
 **Học viên:** Nguyễn Đức Đạt  
-**MSSV:** 20210001  
+**MSSV:** 2A202603544  
 **Lớp:** L3  
 **Corpus:** NLP Foundation Papers — *Attention Is All You Need* (`arxiv:1706.03762`, 15 trang) & *BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding* (`arxiv:1810.04805`, 16 trang). **Tổng cộng: 31 trang nội dung** (đáp ứng yêu cầu ≥ 30 trang).  
 **Repository:** https://github.com/nguyenducdat298/K5-L3-Day06-DataIngestionEngineering  
